@@ -19,4 +19,30 @@ public class NoobChain {
 		String blockChainJSON = new GsonBuilder().setPrettyPrinting().create().toJson(blockChain);
 		System.out.println(blockChainJSON);
 	}
+
+	public static Boolean isChainValid() {
+
+		Block currentBlock; 
+		Block previousBlock;
+
+		for(int i=1; i < blockChain.size(); i++) {
+
+			currentBlock = blockChain.get(i);
+			previousBlock = blockChain.get(i-1);
+
+			if(!currentBlock.getHash().equals(currentBlock.calculateHash())) {
+
+				System.out.println("Current Hashes not equal");
+				return false;
+			}
+
+			if(!previousBlock.getHash().equals(currentBlock.getPreviousHash())) {
+
+				System.out.println("Previous Hashes not equal");
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
