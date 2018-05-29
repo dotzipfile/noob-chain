@@ -8,13 +8,19 @@ import com.dotzipfile.noob_chain.models.Block;
 
 public class NoobChain {
 
-	public static ArrayList<Block> blockChain = new ArrayList<Block>(); 
+	public static ArrayList<Block> blockChain = new ArrayList<Block>();
+	public static int difficulty = 5;
 
 	public static void main(String[] args) {
 
 		blockChain.add(new Block("Hi this is the first block.", "0"));
+		blockChain.get(0).mineBlock(difficulty);
+
 		blockChain.add(new Block("Hi this is the second block.", blockChain.get(blockChain.size() - 1).getHash()));
+		blockChain.get(1).mineBlock(difficulty);
+
 		blockChain.add(new Block("Hi this is the third block.", blockChain.get(blockChain.size() - 1).getHash()));
+		blockChain.get(2).mineBlock(difficulty);
 
 		String blockChainJSON = new GsonBuilder().setPrettyPrinting().create().toJson(blockChain);
 		System.out.println(blockChainJSON);
